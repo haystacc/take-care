@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
-// import jirachiImage from './assets/jirachi.jpg';
+import Header from "./Header";
+import JournalPage from "./pages/JournalPage";
+
 function Pages() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // nothing using this functionality as of now 
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,23 +17,12 @@ function Pages() {
 
   return (
     <>
-      <div className="wrapper">
-        <div className="header">
-          {/* <img className="logo" src={jirachiImage} alt="Jirachi"/> */}
-          <div className="navigation">
-            <Link to="/">{isMobile ? "H" : "Home"}</Link>
-            <span>|</span>
-            <Link to="/blanko">{isMobile ? "B" : "Blanko"}</Link>
-            <span>|</span>
-            <Link to="/slido">{isMobile ? "S" : "Slido"}</Link>
-            <span>|</span>
-            <Link to="/tetro">{isMobile ? "T" : "Tetro"}</Link>
-            <span>|</span>
-            <Link to="/mineo">{isMobile ? "M": "Mineo"}</Link>
-          </div>
-        </div>
+      <div className="wrapper"> {/* lowkey idk what this is for - remnant */}
+        <Header />
+
         <div className="main-body">
           <Routes>
+            <Route path="/journal" element={<JournalPage />} />
             {/* <Route path="/" element={<Dashboard />} /> */}
             {/* <Route path="/mineo" element={<Mineo />} /> */}
           </Routes>
