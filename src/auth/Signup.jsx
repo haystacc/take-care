@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { notify } from "@/Helper";
 
-// continue this later -> watch authentication video on yt 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,8 +20,8 @@ function Signup() {
   }
 
   return (
-    <div>
-      <form onSubmit={ handleSubmit } className="max-w-md mx-auto">
+    <div className="flex justify-center items-center h-screen">
+      <form onSubmit={ handleSubmit } className="w-sm">
         <h3 className="text-xl font-bold mb-1">Sign up here!</h3>
         <p>
           Already have an account? <Link to="/signin" className="text-blue-500">Sign in here!</Link>
