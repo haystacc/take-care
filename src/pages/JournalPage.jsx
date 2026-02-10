@@ -1,10 +1,16 @@
 import TextareaAutosize from 'react-textarea-autosize';
+import Header from "./../Header";
+
 
 function JournalPage() {
   return (
-    <div className="flex justify-center" >
-      <TextareaAutosize className="w-150 border-2 border-solid" minRows={5} defaultValue="dear journal" />
-    </div>
+    <>
+      <Header />
+
+      <div className="flex justify-center" >
+        <TextareaAutosize className="w-150 border-2 border-solid" minRows={5} defaultValue="dear journal" />
+      </div>
+    </>
   );
 }
 
