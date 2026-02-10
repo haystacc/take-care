@@ -9,11 +9,11 @@ function Signup() {
   const { signUp } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     const res = await signUp(email, password);
     if (res.success) {
-      navigate('/journal'); // change this later
+      navigate('/dashboard');
     } else {
       notify.error(res.error.message);
     }
@@ -21,7 +21,7 @@ function Signup() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form onSubmit={ handleSubmit } className="w-sm">
+      <form onSubmit={ handleSignup } className="w-sm">
         <h3 className="text-xl font-bold mb-1">Sign up here!</h3>
         <p>
           Already have an account? <Link to="/signin" className="text-blue-500">Sign in here!</Link>
