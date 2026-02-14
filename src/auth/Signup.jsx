@@ -6,12 +6,13 @@ import { notify } from "@/Helper";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const res = await signUp(email, password);
+    const res = await signUp(email, password, name);
     if (res.success) {
       navigate('/dashboard');
     } else {
@@ -27,6 +28,8 @@ function Signup() {
           Already have an account? <Link to="/signin" className="text-blue-500">Sign in here!</Link>
         </p>
          <div className="flex flex-col">
+          <p className="mt-3 font-semibold">Your name</p>
+          <input placeholder="name" value={name} onChange={e => setName(e.target.value)} className="border-solid border-2 p-3 mt-1" required/>
           <p className="mt-3 font-semibold">Your email</p>
           <input placeholder="name@gmail.com" type="email" value={email} onChange={e => setEmail(e.target.value)} className="border-solid border-2 p-3 mt-1" required/>
           <p className="mt-3 font-semibold">Your password</p>

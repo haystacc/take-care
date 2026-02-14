@@ -4,11 +4,13 @@ import supabase from "@/utils/supabase";
 const AuthContext = createContext();
 
 export function AuthProvider({children}) {
+  const [user, setUser] = useState(null);
   const [session, setSession] = useState(null); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase.auth.getSession().then(({data}) => {
+      setUser(data.session.user); // uuuhhh
       setSession(data.session);
       setLoading(false);
     })
@@ -20,8 +22,14 @@ export function AuthProvider({children}) {
     return () => subscription.unsubscribe();
   }, []);
 
-  async function signUp(email, password) {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+  async function signUp(email, password, name) {
+    const { data, error } = await supabase.auth.signUp(
+      { email, 
+        password,
+        options: {
+          data: { name: name }
+        } 
+      });
     if (error) {
       return { success: false, error };
     }
@@ -45,7 +53,7 @@ export function AuthProvider({children}) {
   }
 
   return (
-    <AuthContext.Provider value={{ session, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

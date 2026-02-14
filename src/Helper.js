@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const notify = {
@@ -13,4 +14,18 @@ export function getGreeting() {
   if (hour < 12) return "Good morning";
   if (hour < 18) return "Good afternoon";
   return "Good evening";
+}
+
+export function getLiveTime() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return currentTime.toLocaleTimeString('en-US');
 }

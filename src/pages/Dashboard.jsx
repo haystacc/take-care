@@ -1,11 +1,41 @@
-import { getGreeting } from "@/Helper";
+import { getGreeting, getLiveTime } from "@/Helper";
+import { TypeAnimation } from 'react-type-animation';
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 function Dashboard() {
   const greeting = getGreeting();
+  const liveTime = getLiveTime();
+  const { user } = useAuth();
+
+  const name = user.user_metadata.name;
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      {greeting} {/* find a way to get the user's name as well */}
+    <div className="flex flex-col justify-center items-center h-full">
+      <div className="flex flex-col items-center">
+        <TypeAnimation 
+          sequence={[greeting + " " + name + "!", 1000]}
+          speed={50}
+          className="text-5xl font-semibold mb-5"
+        />
+
+        <h1 className="text-xl font-semibold">
+          The current time is: {liveTime}
+        </h1>
+      </div>
+
+      <div className="flex flex-col items-center mt-10">
+        <h1 className="text-xl">
+          Ready to journal today?
+        </h1>
+        <Link to="/journal">
+          <Button className="mt-3">Click here!</Button>
+        </Link>
+      </div>
+
+
+
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import TextareaAutosize from 'react-textarea-autosize';
 import { IconMoodAnnoyed, IconMoodSad, IconMoodEmpty, IconMoodSmile, IconMoodHappy } from '@tabler/icons-react';
 import MoodIcon from '@/components/ui/MoodIcon';
-import { TypeAnimation } from 'react-type-animation';
 import { useState } from 'react';
 import supabase from '@/utils/supabase';
 import { Button } from '@/components/ui/button';
@@ -34,13 +33,7 @@ function JournalPage() {
     <>
       <div className="flex flex-col items-center" >
         <div className="flex flex-col items-center border-2 border-solid p-5 my-5">
-          <TypeAnimation
-            sequence={[
-              'How are you feeling today?',
-              1000
-            ]}
-            className="text-xl font-bold pb-5"
-           />
+          <h1 className="text-xl font-bold pb-5">How are you feeling today?</h1>
           <div className="flex gap-15">
             {moods.map((mood) => (
               <MoodIcon 

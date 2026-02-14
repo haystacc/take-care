@@ -2,7 +2,7 @@
 function CalendarPage() {
   return (
     <>
-      <div>habits</div>
+      <div>calendar</div>
     </>
   );
 }
