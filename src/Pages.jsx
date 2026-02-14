@@ -4,7 +4,10 @@ import Signin from "./auth/Signin"
 import Signup from "./auth/Signup"
 import Dashboard from "./pages/Dashboard";
 import JournalPage from "./pages/JournalPage";
-import ProtectedRoute from "./context/ProtectedRoute";
+import HabitsPage from "./pages/HabitsPage";
+import CalendarPage from "./pages/CalendarPage";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import AppLayout from "./layouts/AppLayout";
 
 function Pages() {
   const [isMobile, setIsMobile] = useState(false); // nothing using this functionality as of now 
@@ -24,8 +27,12 @@ function Pages() {
         <Route path="/signup" element={<Signup />}/>
         <Route path="/signin" element={<Signin />}/>
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />}/>
-          <Route path="/journal" element={<JournalPage />} />
+          <Route element={<AppLayout />}>
+            <Route path="/dashboard" element={<Dashboard />}/>
+            <Route path="/journal" element={<JournalPage />} />
+            <Route path="/habits" element={<HabitsPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
+          </Route>
         </Route>
       </Routes> 
     </>

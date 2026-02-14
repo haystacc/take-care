@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { notify } from "@/Helper";
 
 
-import NavIcon from './NavIcon'
+import NavIcon from './components/ui/NavIcon'
 
 import { IconHome } from '@tabler/icons-react';
 import { IconNotebook } from '@tabler/icons-react';
@@ -48,7 +48,7 @@ function Header() {
             <NavIcon icon={IconSettings} label="SETTINGS" link="settings" /> 
           </div>
 
-          <div className="flex gap-5">
+        <div className="flex gap-5">
             <Button variant="outline" onClick={handleSignout}>Sign Out</Button>
           </div>
           
