@@ -1,14 +1,17 @@
 import TextareaAutosize from 'react-textarea-autosize';
 import { IconMoodAnnoyed, IconMoodSad, IconMoodEmpty, IconMoodSmile, IconMoodHappy } from '@tabler/icons-react';
 import MoodIcon from '@/components/ui/MoodIcon';
-import { useState } from 'react';
-import supabase from '@/utils/supabase';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-
+import { useAuth } from '@/context/AuthContext';
+import { upsertJournalEntry } from '@/services/journalService';
+import { notify } from '@/Helper';
+import { getJournalEntryForDate } from '@/services/journalService';
 
 function JournalPage() {
-  const [content, setContent] = useState(""); 
+  const { user } = useAuth();
   const [mood, setMood] = useState(null);
+  const [content, setContent] = useState("");
 
   const moods = [
     { icon: IconMoodSad, label: "Bad" },
@@ -18,15 +21,47 @@ function JournalPage() {
     { icon: IconMoodHappy, label: "Great" },
   ];
 
+  const entry_date = new Date().toLocaleDateString("en-CA", {
+    timeZone: "Australia/Sydney", // fix later -> shouldn't be exclusive to sydney
+  });
   const formattedDate = new Date().toLocaleDateString("en-GB");
 
-  function handleSelectedMood(value) {
-    setMood(value);
-    // connect this to supabase -> save into a table here
+  useEffect(() => {
+    if (!user) return; 
+
+    async function loadEntry() {
+      const res = await getJournalEntryForDate(user.id, entry_date);
+
+      if (res.success) { // test if this works when not pre-filled
+        setMood(res.data.mood ?? null);
+        setContent(res.data.content);
+      }
+    }
+
+    loadEntry();
+  }, [user, entry_date])
+
+  async function handleSelectedMood(m) {
+    setMood(m);
+
+    console.log(user.id);
+    console.log(entry_date);
+
+    const res = await upsertJournalEntry({ user_id: user.id, entry_date, mood: m });
+    if (res.success) {
+      notify.success('Mood saved successfully!')
+    } else {
+      notify.error(res.error.message);
+    }
   }
 
-  function handleSubmit() {
-    // save into supabase
+  async function handleSubmit() {
+    const res = await upsertJournalEntry({ user_id: user.id, entry_date, content });
+    if (res.success) {
+      notify.success('Journal saved succesfully!')
+    } else {
+      notify.error(res.error.message);
+    }
   }
   
   return (
@@ -35,13 +70,13 @@ function JournalPage() {
         <div className="flex flex-col items-center border-2 border-solid p-5 my-5">
           <h1 className="text-xl font-bold pb-5">How are you feeling today?</h1>
           <div className="flex gap-15">
-            {moods.map((mood) => (
+            {moods.map((m) => (
               <MoodIcon 
-                key={mood.label} 
-                icon={mood.icon} 
-                label={mood.label} 
-                selected={mood === mood.label}
-                onSelect={() => handleSelectedMood(mood.label)}
+                key={m.label} 
+                icon={m.icon} 
+                label={m.label} 
+                selected={mood === m.label}
+                onSelect={() => handleSelectedMood(m.label)}
               />
             ))}
           </div>
