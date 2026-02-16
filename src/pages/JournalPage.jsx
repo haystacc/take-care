@@ -4,14 +4,31 @@ import MoodIcon from '@/components/ui/MoodIcon';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
-import { upsertJournalEntry } from '@/services/journalService';
+import { upsertJournalEntry, getJournalEntryForDate } from '@/services/journalService';
 import { notify } from '@/Helper';
-import { getJournalEntryForDate } from '@/services/journalService';
+import { toEntryDate, toDisplayDate } from "@/utils/date";
+
+import { useJournalEntry } from '@/hooks/useJournalEntry';
+
+import { FileUploader } from "react-drag-drop-files";
+
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 function JournalPage() {
   const { user } = useAuth();
-  const [mood, setMood] = useState(null);
+
+  const entry_date = toEntryDate(new Date());
+  const formattedDate = toDisplayDate(new Date());
+
+  const entry = useJournalEntry(user.id, entry_date);
+
+  const [mood, setMood] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    setMood(entry.mood);
+    setContent(entry.content);
+  }, [entry.mood, entry.content])
 
   const moods = [
     { icon: IconMoodSad, label: "Bad" },
@@ -21,31 +38,8 @@ function JournalPage() {
     { icon: IconMoodHappy, label: "Great" },
   ];
 
-  const entry_date = new Date().toLocaleDateString("en-CA", {
-    timeZone: "Australia/Sydney", // fix later -> shouldn't be exclusive to sydney
-  });
-  const formattedDate = new Date().toLocaleDateString("en-GB");
-
-  useEffect(() => {
-    if (!user) return; 
-
-    async function loadEntry() {
-      const res = await getJournalEntryForDate(user.id, entry_date);
-
-      if (res.success) { // test if this works when not pre-filled
-        setMood(res.data.mood ?? null);
-        setContent(res.data.content);
-      }
-    }
-
-    loadEntry();
-  }, [user, entry_date])
-
   async function handleSelectedMood(m) {
     setMood(m);
-
-    console.log(user.id);
-    console.log(entry_date);
 
     const res = await upsertJournalEntry({ user_id: user.id, entry_date, mood: m });
     if (res.success) {
@@ -84,7 +78,6 @@ function JournalPage() {
         
         <div className="max-w-2xl w-full flex flex-col items-center border-2 border-solid p-5 rounded-xl">
           <div className="flex justify-between items-center w-full mb-5">
-            {/* the title here should contain the date */}
             <h1 className="text-xl font-semibold">Journal: {formattedDate}</h1>
             <Button className="" onClick={handleSubmit}>
               Save Entry
@@ -96,6 +89,7 @@ function JournalPage() {
             onChange={(e) => setContent(e.target.value)}
             className="w-full text-lg leading-relaxed rounded-lg border-2 border-solid focus:border-indigo-500 p-2" 
             minRows={8} 
+            maxRows={10}
             placeholder="Dear journal..."
           />
 

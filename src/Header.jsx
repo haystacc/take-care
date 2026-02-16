@@ -11,9 +11,9 @@ import NavIcon from './components/ui/NavIcon'
 
 import { IconHome } from '@tabler/icons-react';
 import { IconNotebook } from '@tabler/icons-react';
-import { IconSettings } from '@tabler/icons-react';
 import { IconCalendar } from '@tabler/icons-react';
 import { IconNote } from '@tabler/icons-react';
+import { IconMoodSmile } from '@tabler/icons-react';
 
 function Header() {
   const [nav, setNav] = useState(false);
@@ -45,14 +45,13 @@ function Header() {
             <NavIcon icon={IconNotebook} label="JOURNAL" link="journal" />
             <NavIcon icon={IconHome} label="DASHBOARD" link="dashboard" />
             <NavIcon icon={IconNote} label="HABITS" link="habits" />
-            <NavIcon icon={IconSettings} label="SETTINGS" link="settings" /> 
+            <NavIcon icon={IconMoodSmile} label="MOOD TRACKER" link="moodtracker" />
+            {/* <NavIcon icon={IconSettings} label="SETTINGS" link="settings" />  */}
           </div>
 
-        <div className="flex gap-5">
+          <div className="flex gap-5">
             <Button variant="outline" onClick={handleSignout}>Sign Out</Button>
-          </div>
-          
-          {/* can fix this later ^ should be similar to logo on the left */}
+          </div>   
         </div>
       </nav>
 

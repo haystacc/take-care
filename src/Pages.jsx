@@ -1,26 +1,15 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Signin from "./auth/Signin"
 import Signup from "./auth/Signup"
 import Dashboard from "./pages/Dashboard";
 import JournalPage from "./pages/JournalPage";
 import HabitsPage from "./pages/HabitsPage";
 import CalendarPage from "./pages/CalendarPage";
+import MoodTrackerPage from "./pages/MoodTrackerPage"
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
 
 function Pages() {
-  const [isMobile, setIsMobile] = useState(false); // nothing using this functionality as of now 
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 800);
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <>
       <Routes>
@@ -32,6 +21,7 @@ function Pages() {
             <Route path="/journal" element={<JournalPage />} />
             <Route path="/habits" element={<HabitsPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/moodtracker" element={<MoodTrackerPage/>}/>
           </Route>
         </Route>
       </Routes> 

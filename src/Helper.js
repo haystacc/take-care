@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+const APP_TZ = "Australia/Sydney"; // later: use user tz if you want
+
 export const notify = {
   success: (msg) => toast.success(msg),
   error: (msg) => toast.error(msg),

@@ -33,9 +33,6 @@ function Dashboard() {
           <Button className="mt-3">Click here!</Button>
         </Link>
       </div>
-
-
-
     </div>
   );
 }
