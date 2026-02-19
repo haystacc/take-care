@@ -17,8 +17,9 @@ const fileTypes = ["JPG", "PNG", "GIF"];
 function JournalPage() {
   const { user } = useAuth();
 
-  const entry_date = toEntryDate(new Date());
-  const formattedDate = toDisplayDate(new Date());
+  const today = new Date();
+  const entry_date = toEntryDate(today);
+  const formattedDate = toDisplayDate(today);
 
   const entry = useJournalEntry(user.id, entry_date);
 

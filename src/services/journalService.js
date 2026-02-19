@@ -31,3 +31,17 @@ export async function getJournalEntryForDate(user_id, entry_date) {
   };
   return { success: true, data };
 }
+
+export async function getMoodForMonth(user_id, entry_date, end_date) {
+  const { data, error } = await supabase
+    .from("journal_entries")
+    .select("entry_date, mood")
+    .eq("user_id", user_id)
+    .gte("entry_date", entry_date)
+    .lt("entry_date", end_date);
+
+  if (error) return {
+    success: false, error
+  }
+  return { success: true, data };
+}
