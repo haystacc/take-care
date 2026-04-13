@@ -12,21 +12,21 @@ function Dashboard() {
   const name = user.user_metadata.name;
 
   return (
-    <div className="flex flex-col justify-center items-center h-full">
-      <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col justify-center items-center h-full px-4">
+      <div className="flex w-full flex-col items-center text-center">
         <TypeAnimation 
           sequence={[greeting + " " + name + "!", 1000]}
           speed={50}
-          className="text-5xl font-semibold mb-5"
+          className="text-4xl md:text-5xl font-semibold mb-5"
         />
 
-        <h1 className="text-xl font-semibold">
+        <h1 className="text-lg md:text-xl font-semibold">
           The current time is: {liveTime}
         </h1>
       </div>
 
-      <div className="flex flex-col items-center mt-10">
-        <h1 className="text-xl">
+      <div className="flex w-full flex-col items-center mt-10 text-center">
+        <h1 className="text-lg md:text-xl">
           Ready to journal today?
         </h1>
         <Link to="/journal">
