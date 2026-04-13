@@ -4,15 +4,11 @@ import MoodIcon from '@/components/ui/MoodIcon';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
-import { upsertJournalEntry, getJournalEntryForDate } from '@/services/journalService';
+import { upsertJournalEntry } from '@/services/journalService';
 import { notify } from '@/Helper';
 import { toEntryDate, toDisplayDate } from "@/utils/date";
 
 import { useJournalEntry } from '@/hooks/useJournalEntry';
-
-import { FileUploader } from "react-drag-drop-files";
-
-const fileTypes = ["JPG", "PNG", "GIF"];
 
 function JournalPage() {
   const { user } = useAuth();
@@ -61,10 +57,10 @@ function JournalPage() {
   
   return (
     <>
-      <div className="flex flex-col items-center" >
-        <div className="flex flex-col items-center border-2 border-solid p-5 my-5">
+      <div className="flex h-full min-h-0 flex-col items-center justify-center gap-4 overflow-hidden p-4" >
+        <div className="flex w-full max-w-4xl shrink-0 flex-col items-center border-2 border-solid p-4">
           <h1 className="text-xl font-bold pb-5">How are you feeling today?</h1>
-          <div className="flex gap-15">
+          <div className="flex flex-wrap justify-center gap-4">
             {moods.map((m) => (
               <MoodIcon 
                 key={m.label} 
@@ -77,7 +73,7 @@ function JournalPage() {
           </div>
         </div>
         
-        <div className="max-w-2xl w-full flex flex-col items-center border-2 border-solid p-5 rounded-xl">
+        <div className="w-full max-w-4xl flex-1 min-h-0 overflow-hidden rounded-xl border-2 border-solid p-4 flex flex-col items-center">
           <div className="flex justify-between items-center w-full mb-5">
             <h1 className="text-xl font-semibold">Journal: {formattedDate}</h1>
             <Button className="" onClick={handleSubmit}>
@@ -88,9 +84,9 @@ function JournalPage() {
           <TextareaAutosize 
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full text-lg leading-relaxed rounded-lg border-2 border-solid focus:border-indigo-500 p-2" 
-            minRows={8} 
-            maxRows={10}
+            className="w-full flex-1 min-h-0 resize-none overflow-y-auto text-lg leading-relaxed rounded-lg border-2 border-solid focus:border-indigo-500 p-2" 
+            minRows={6} 
+            maxRows={8}
             placeholder="Dear journal..."
           />
 

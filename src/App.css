@@ -122,3 +122,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+.journal-calendar {
+  width: min(100%, 19.5rem);
+  max-width: 19.5rem;
+}
+
+.journal-calendar .react-calendar__navigation button,
+.journal-calendar .react-calendar__tile {
+  padding: 0.45rem 0.25rem;
+}
+
+.journal-calendar .react-calendar__navigation {
+  margin-bottom: 0.25rem;
+}
+
+.journal-calendar .react-calendar__month-view__weekdays {
+  font-size: 0.72rem;
+}

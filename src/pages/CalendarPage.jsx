@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getJournalEntryForDate } from '@/services/journalService';
 import { useAuth } from '@/context/AuthContext';
 import { toEntryDate, toDisplayDate } from '@/utils/date';
 import { useJournalEntry } from '@/hooks/useJournalEntry';
@@ -16,12 +15,14 @@ function CalendarPage() {
   const {mood, content} = useJournalEntry(user.id, entryDate);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <Calendar onClickDay={(d) => setSelectedDate(d)} value={selectedDate} className="mb-5"/>
-      <div className="max-w-3xl w-full flex flex-col items-center border-2 border-solid p-5 rounded-xl">
+    <div className="flex h-full min-h-0 flex-col items-center justify-center gap-4 overflow-hidden p-4">
+      <div className="shrink-0">
+        <Calendar onClickDay={(d) => setSelectedDate(d)} value={selectedDate} className="journal-calendar mb-2"/>
+      </div>
+      <div className="w-full max-w-3xl flex-1 min-h-0 overflow-hidden rounded-xl border-2 border-solid p-4 flex flex-col items-center">
         <h1 className="text-xl font-semibold underline">Journal: {formattedDate}</h1>
         <h2 className="italic mt-1">Mood: {mood}</h2>
-        <p className="h-44 overflow-y-auto mt-3 text-sm leading-relaxed whitespace-pre-wrap" >{content}</p>
+        <p className="mt-3 flex-1 overflow-y-auto text-sm leading-relaxed whitespace-pre-wrap" >{content}</p>
       </div>
     </div>
   );
