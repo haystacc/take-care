@@ -28,11 +28,11 @@ function JournalPage() {
   }, [entry.mood, entry.content])
 
   const moods = [
-    { icon: IconMoodSad, label: "Bad" },
-    { icon: IconMoodAnnoyed, label: "Eh" },
-    { icon: IconMoodEmpty, label: "Okay" },
-    { icon: IconMoodSmile, label: "Good" },
-    { icon: IconMoodHappy, label: "Great" },
+    { icon: IconMoodSad, label: "Bad", color: "text-red-600"  },
+    { icon: IconMoodAnnoyed, label: "Eh", color: "text-orange-500" },
+    { icon: IconMoodEmpty, label: "Okay", color: "text-yellow-500" },
+    { icon: IconMoodSmile, label: "Good", color: "text-lime-500" },
+    { icon: IconMoodHappy, label: "Great", color: "text-green-600" },
   ];
 
   async function handleSelectedMood(m) {
@@ -94,7 +94,6 @@ function JournalPage() {
             <span>{content.length} chars</span>
           </div>
         </div>
-        
       </div>
     </>
   );
