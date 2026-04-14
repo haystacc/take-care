@@ -96,7 +96,7 @@ function MoodTrackerPage() {
   }
 
   return (
-    <div className="flex w-full h-full min-h-0 flex-col lg:flex-row gap-6 items-center lg:items-start justify-start lg:justify-center overflow-auto p-4">
+    <div className="flex w-full h-full min-h-0 flex-col lg:flex-row gap-6 items-center justify-start lg:justify-center overflow-auto p-4">
       <div className="flex-shrink-0">
         <Calendar 
           tileContent={displayMood}

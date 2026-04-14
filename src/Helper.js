@@ -3,6 +3,16 @@ import { toast } from "react-toastify";
 
 const APP_TZ = "Australia/Sydney"; // later: use user tz if you want
 
+const kaomojis = [
+  "(-◡-)",
+  "(＾▽＾)",
+  "(￣▽￣)",
+  "(°▽°)",
+  "(⁀ᗢ⁀)",
+  "(．．)",
+  "U・ᴥ・U"
+]
+
 export const notify = {
   success: (msg) => toast.success(msg),
   error: (msg) => toast.error(msg),
@@ -30,4 +40,8 @@ export function getLiveTime() {
   }, []);
 
   return currentTime.toLocaleTimeString('en-US');
+}
+
+export function getKaomoji() {
+  return kaomojis[Math.floor(Math.random() * kaomojis.length)];
 }
