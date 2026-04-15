@@ -43,7 +43,7 @@ export function RichTextEditor({ content, onChange }) {
     },
     editorProps: {
       attributes: {
-        class: 'prose max-w-none p-3 min-h-48 outline-none prose-sm leading-tight',
+        class: 'prose max-w-none p-3 min-h-48 outline-none pprose-sse-sm leading-tight',
       },
     },
   })

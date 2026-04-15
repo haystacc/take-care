@@ -15,7 +15,7 @@ function CalendarPage() {
   const {mood, content} = useJournalEntry(user.id, entryDate);
 
   return (
-    <div className="flex h-full min-h-0 max-h-150 flex-col items-center justify-center gap-4 overflow-hidden p-4">
+    <div className="flex h-full min-h-0 flex-col items-center justify-center gap-4 overflow-hidden p-4">
       <div className="shrink-0">
         <Calendar onClickDay={(d) => setSelectedDate(d)} value={selectedDate} className="journal-calendar mb-2"/>
       </div>

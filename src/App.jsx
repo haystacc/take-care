@@ -8,7 +8,7 @@ function App() {
     <>
       <BrowserRouter>
         <Pages />
-        <ToastContainer aria-live="assertive" role="alert"/>
+        <ToastContainer aria-live="assertive" role="alert" position="bottom-right"/>
       </BrowserRouter>
     </>
   )
