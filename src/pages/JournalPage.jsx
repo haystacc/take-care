@@ -7,8 +7,8 @@ import { useAuth } from '@/context/AuthContext';
 import { upsertJournalEntry } from '@/services/journalService';
 import { notify } from '@/Helper';
 import { toEntryDate, toDisplayDate } from "@/utils/date";
-
 import { useJournalEntry } from '@/hooks/useJournalEntry';
+import { RichTextEditor } from '@/components/ui/RichTextEditor'
 
 function JournalPage() {
   const { user } = useAuth();
@@ -81,13 +81,17 @@ function JournalPage() {
             </Button>
           </div>
 
-          <TextareaAutosize 
+          {/* <TextareaAutosize 
             value={content}
             onChange={(e) => setContent(e.target.value)}
             className="w-full flex-1 min-h-0 resize-none overflow-y-auto text-lg leading-relaxed rounded-lg border-2 border-solid focus:border-indigo-500 p-2" 
             minRows={6} 
             maxRows={8}
             placeholder="Dear journal..."
+          /> */}
+          <RichTextEditor
+            content={content}
+            onChange={setContent}
           />
 
           <div className="mt-3 flex items-center justify-between text-xs text-gray-500">

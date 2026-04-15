@@ -22,7 +22,7 @@ function CalendarPage() {
       <div className="w-full max-w-3xl flex-1 min-h-0 overflow-hidden rounded-xl border-2 border-solid p-4 flex flex-col items-center">
         <h1 className="text-xl font-semibold underline">Journal: {formattedDate}</h1>
         <h2 className="italic mt-1">Mood: {mood}</h2>
-        <p className="mt-3 flex-1 overflow-y-auto text-sm leading-relaxed whitespace-pre-wrap" >{content}</p>
+        <div className="mt-3 flex-1 overflow-y-auto text-sm prose prose-sm max-w-none w-full" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   );
