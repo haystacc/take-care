@@ -15,7 +15,7 @@ function Dashboard() {
     setKaomoji(getKaomoji());
   }, []);
 
-  const name = user.user_metadata.name;
+  const name = user?.user_metadata?.name || "Guest";
 
   return (
     <div className="flex w-full flex-col justify-center items-center h-full px-4">
