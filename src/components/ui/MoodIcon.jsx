@@ -8,7 +8,7 @@ function MoodIcon({ icon: Icon, label, selected, onSelect }) {
         selected ? " text-indigo-400" : "hover:scale-110"
       }`}
     >
-      <Icon className="w-8 h-8" />
+      <Icon className="w-6 h-6" />
       <span className="text-s">{label}</span>
     </button>
   );

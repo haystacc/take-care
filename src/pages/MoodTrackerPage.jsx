@@ -4,31 +4,13 @@ import { getJournalEntryForDate, getMoodForMonth } from "@/services/journalServi
 import { toEntryDate } from "@/utils/date";
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { IconMoodSad, IconMoodAnnoyed, IconMoodEmpty, IconMoodSmile, IconMoodHappy } from '@tabler/icons-react';
+import { MOOD_ORDER, MOOD_COLORS, getMoodIcon } from "@/utils/moodConfig";
 
 function MoodTrackerPage() {
   const { user } = useAuth();
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const [moodByDate, setMoodByDate] = useState({}); 
-  const [yearlyStats, setYearlyStats] = useState({});
-
-  const moodOrder = ["Bad", "Eh", "Okay", "Good", "Great"]; 
-
-  const moodBgColors = {
-    "Bad": "bg-red-200",
-    "Eh": "bg-orange-200",
-    "Okay": "bg-yellow-200",
-    "Good": "bg-lime-200",
-    "Great": "bg-green-200",
-  }; 
-
-  const moodIcons = {
-    "Bad": { icon: IconMoodSad, color: "text-red-600" },
-    "Eh": { icon: IconMoodAnnoyed, color: "text-orange-500" },
-    "Okay": { icon: IconMoodEmpty, color: "text-yellow-500" },
-    "Good": { icon: IconMoodSmile, color: "text-lime-500" },
-    "Great": { icon: IconMoodHappy, color: "text-green-600" },
-  }; 
+  const [yearlyStats, setYearlyStats] = useState({}); 
 
   useEffect(() => {
     async function loadMoods() {
@@ -68,7 +50,7 @@ function MoodTrackerPage() {
 
       if (res.success) {
         const stats = {};
-        moodOrder.forEach((mood) => {
+        MOOD_ORDER.forEach((mood) => {
           stats[mood] = 0;
         });
 
@@ -90,12 +72,12 @@ function MoodTrackerPage() {
     const mood = moodByDate[key];
 
     if (view === "month" && mood) {
-      const moodData = moodIcons[mood];
+      const moodData = getMoodIcon(mood);
       if (moodData) {
-        const MoodIcon = moodData.icon;
+        const MoodIcon = moodData.Icon;
         return (
           <div className="flex justify-center items-center w-full">
-            <MoodIcon size={20} className={moodData.color} />
+            <MoodIcon size={20} className={moodData.textColor} />
           </div>
         );
       }
@@ -112,25 +94,25 @@ function MoodTrackerPage() {
         />
       </div>
 
-      <div className="flex-shrink-0 bg-white rounded-xl border border-gray-300 shadow-md p-6 w-64">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">Mood Stats - {new Date().getFullYear()}</h2>
+      <div className="flex-shrink-0 bg-white border border-gray-300 shadow-md p-6 w-64">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">Mood Stats - {new Date().getFullYear()}</h2>
         
         {(() => {
           const total = Object.values(yearlyStats).reduce((sum, count) => sum + count, 0);
           return total > 0 ? (
             <div className="space-y-3">
-              {moodOrder.map((mood) => {
-                const moodData = moodIcons[mood];
+              {MOOD_ORDER.map((mood) => {
+                const moodData = getMoodIcon(mood);
                 const count = yearlyStats[mood] || 0;
                 const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
-                const MoodIcon = moodData.icon;
-                const barColor = moodBgColors[mood];
+                const MoodIcon = moodData.Icon;
+                const barColor = moodData.bgColor;
 
                 return (
                   <div key={mood}>
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
-                        <MoodIcon size={18} className={moodData.color} />
+                        <MoodIcon size={18} className={moodData.textColor} />
                         <span className="text-sm text-gray-700 font-medium">{mood}</span>
                       </div>
                       <div className="text-right">
@@ -140,7 +122,7 @@ function MoodTrackerPage() {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
                       <div 
-                        className={`h-full rounded-full ${barColor} transition-all`}
+                        className={`h-full ${barColor} transition-all`}
                         style={{ width: `${percentage}%` }}
                       />
                     </div>

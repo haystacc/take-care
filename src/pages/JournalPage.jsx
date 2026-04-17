@@ -59,7 +59,7 @@ function JournalPage() {
     <>
       <div className="flex h-full min-h-0 flex-col items-center justify-center gap-4 overflow-hidden p-4" >
         <div className="flex w-full shrink-0 flex-col items-center border-2 border-solid p-4">
-          <h1 className="text-xl font-bold pb-5">How are you feeling today?</h1>
+          <h1 className="text-lg font-semibold pb-5">How are you feeling today?</h1>
           <div className="flex flex-wrap justify-center gap-4">
             {moods.map((m) => (
               <MoodIcon 
@@ -73,12 +73,9 @@ function JournalPage() {
           </div>
         </div>
         
-        <div className="w-full max-w-[591px] flex-1 min-h-0 overflow-hidden rounded-xl border-2 border-solid p-4 flex flex-col items-center">
-          <div className="flex justify-between items-center w-full mb-5">
-            <h1 className="text-xl font-semibold">Journal: {formattedDate}</h1>
-            <Button className="" onClick={handleSubmit}>
-              Save Entry
-            </Button>
+        <div className="w-full max-w-[591px] flex-1 min-h-0 overflow-hidden border-2 border-solid p-4 flex flex-col items-center">
+          <div className="flex justify-center w-full mb-5 shrink-0">
+            <h1 className="text-lg font-semibold">Journal: {formattedDate}</h1>
           </div>
 
           <RichTextEditor
@@ -86,8 +83,11 @@ function JournalPage() {
             onChange={setContent}
           />
 
-          <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
+          <div className="mt-3 flex items-center justify-between text-xs text-gray-500 w-full shrink-0">
             <span>{content.length} chars</span>
+            <Button className="h-7" onClick={handleSubmit}>
+              Save
+            </Button>
           </div>
         </div>
       </div>

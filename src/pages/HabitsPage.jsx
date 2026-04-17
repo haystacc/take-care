@@ -43,7 +43,7 @@ function HabitsPage() {
   return (
     <div className="flex items-center justify-center h-full w-full px-4">
       <div className="w-full max-w-2xl flex flex-col gap-6">
-        <div className="bg-white rounded-xl border border-gray-300 shadow-md p-6">
+        <div className="bg-white border border-gray-300 shadow-md p-6">
           <h1 className="text-xl font-bold mb-4 text-gray-800">My Habits</h1>
           
           <div className="flex gap-2 mb-4">
@@ -53,7 +53,7 @@ function HabitsPage() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Add a new habit..."
-              className="flex-1 border-2 border-gray-300 rounded-lg px-4 py-2 text-base focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+              className="flex-1 border-2 border-gray-300 px-4 py-2 text-base focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
             />
             <Button 
               onClick={addHabit}
@@ -65,7 +65,7 @@ function HabitsPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-300 shadow-md p-6">
+        <div className="bg-white border border-gray-300 shadow-md p-6">
           {sortedHabits.length === 0 ? (
             <p className="text-gray-500 text-center py-8">No habits yet. Add one to get started!</p>
           ) : (
@@ -73,7 +73,7 @@ function HabitsPage() {
               {sortedHabits.map((habit) => (
                 <div
                   key={habit.id}
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${
+                  className={`flex items-center gap-3 p-3 roundedborder-2 transition-all ${
                     habit.completed
                       ? 'bg-gray-50 border-gray-200 opacity-60'
                       : 'bg-white border-gray-200 hover:border-indigo-300'

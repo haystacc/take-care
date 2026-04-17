@@ -13,8 +13,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: process.env.VITE_BASE_PATH || "/take-care"
-  ,
+  base: process.env.VITE_BASE_PATH || (process.env.NODE_ENV === 'production' ? '/take-care/' : '/'),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
