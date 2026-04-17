@@ -14,6 +14,14 @@ function MoodTrackerPage() {
 
   const moodOrder = ["Bad", "Eh", "Okay", "Good", "Great"]; 
 
+  const moodBgColors = {
+    "Bad": "bg-red-200",
+    "Eh": "bg-orange-200",
+    "Okay": "bg-yellow-200",
+    "Good": "bg-lime-200",
+    "Great": "bg-green-200",
+  }; 
+
   const moodIcons = {
     "Bad": { icon: IconMoodSad, color: "text-red-600" },
     "Eh": { icon: IconMoodAnnoyed, color: "text-orange-500" },
@@ -116,16 +124,25 @@ function MoodTrackerPage() {
                 const count = yearlyStats[mood] || 0;
                 const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
                 const MoodIcon = moodData.icon;
+                const barColor = moodBgColors[mood];
 
                 return (
-                  <div key={mood} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 flex-1">
-                      <MoodIcon size={18} className={moodData.color} />
-                      <span className="text-sm text-gray-700 font-medium">{mood}</span>
+                  <div key={mood}>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <MoodIcon size={18} className={moodData.color} />
+                        <span className="text-sm text-gray-700 font-medium">{mood}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs font-semibold text-gray-600">{count} days</div>
+                        <div className="text-xs text-gray-500">{percentage}%</div>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs font-semibold text-gray-600">{count} days</div>
-                      <div className="text-xs text-gray-500">{percentage}%</div>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                      <div 
+                        className={`h-full rounded-full ${barColor} transition-all`}
+                        style={{ width: `${percentage}%` }}
+                      />
                     </div>
                   </div>
                 );
