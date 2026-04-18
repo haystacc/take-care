@@ -1,5 +1,5 @@
 # Take Care
-> Take Care began from a simple problem — I always wanted to journal, but never had my journal with me. So I built something I'd actually use.  
+> Take Care began from a simple problem. I always wanted to journal, but never had my journal with me. So I built something I'd actually use.  
 
 A minimal app to log your mood, write journal entries, track habits, and reflect on how you've been feeling over time.
 
