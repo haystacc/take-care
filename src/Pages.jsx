@@ -3,7 +3,6 @@ import Signin from "./auth/Signin"
 import Signup from "./auth/Signup"
 import Dashboard from "./pages/Dashboard";
 import JournalPage from "./pages/JournalPage";
-import HabitsPage from "./pages/HabitsPage";
 import CalendarPage from "./pages/CalendarPage";
 import MoodTrackerPage from "./pages/MoodTrackerPage"
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -20,7 +19,6 @@ function Pages() {
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/journal" element={<JournalPage />} />
-            <Route path="/habits" element={<HabitsPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/moodtracker" element={<MoodTrackerPage/>}/>
           </Route>

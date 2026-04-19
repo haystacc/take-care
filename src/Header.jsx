@@ -34,7 +34,7 @@ function Header() {
     { icon: IconCalendar, label: "CALENDAR", link: "calendar" },
     { icon: IconNotebook, label: "JOURNAL", link: "journal" },
     { icon: IconHome, label: "DASHBOARD", link: "dashboard" },
-    { icon: IconNote, label: "HABITS", link: "habits" },
+
     { icon: IconMoodSmile, label: "MOOD TRACKER", link: "moodtracker" },
   ];
 
