@@ -1,16 +1,33 @@
-# React + Vite
+# Take Care
+> Take Care began from a simple problem. I always wanted to journal, but never had my journal with me. So I built something I'd actually use.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal app to log your mood, write journal entries, track habits, and reflect on how you've been feeling over time.
 
-Currently, two official plugins are available:
+[Live Demo →](https://take-care-omega.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img width="1400" height="688" alt="image" src="https://github.com/user-attachments/assets/719601c2-89de-4378-88a0-efce551bc9bb" />
 
-## React Compiler
+## Features
+- 📝 Write a daily journal entry and log your mood
+- 📅 Browse and revisit past entries
+- ✅ Track daily habits
+- 📊 Visualise your mood across the year with a stat summary
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- React, Tailwind CSS, shadcn/ui
+- Supabase (auth + database)
+- Deployed on Vercel
 
-## Expanding the ESLint configuration
+## Running locally
+```
+git clone https://github.com/your-username/project.git
+cd project
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Create a `.env` file with your Supabase credentials:
+```
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_key
+```
